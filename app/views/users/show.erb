@@ -1,0 +1,19 @@
+<% if @user.characters.count >= 1 %>
+  <p> Here are your characters, <%= @user.name %>
+  <% @user.characters.each do |character| %>
+    <p>LINK</p>
+  <% end %>
+<% else %>
+  <p> You don't have any characters yet! </p>
+<% end %>
+<p><a href="/#"> Create a new character! </a><p>
+
+<% if @user.parties.count >= 1 %>
+  <p> These are your parties: </p>
+  <% @user.parties.each do |party| %>
+    <p>LINK</p>
+  <% end %>
+<% else %>
+  <p> You aren't a member of any parties yet! </p>
+<% end %>
+<p><a href="/#"> Join a party </a> or <a href="/#"> create a new party! </a><p>
