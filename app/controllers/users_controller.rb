@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   get '/signup' do
+    @message = session[:message]
+    session[:message] = nil
     if !logged_in?
       erb :'users/create_user'
     else
@@ -10,10 +12,16 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+    if logged_in? && current_user.id == @user.id
+      erb :'users/personal_profile'
+    else
+      erb :'users/show'
+    end
   end
 
   get '/login' do
+    @message = session[:message]
+    session[:message] = nil
     if !logged_in?
       erb :'users/login'
     else
@@ -23,7 +31,8 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if User.find_by(name: params[:name])
-      erb :'/users/create_user', locals: {message: 'That username is taken already. Sorry!'}
+      session[:message] = 'That username is taken already. Sorry!'
+      redirect to '/users/signup'
     else
       @user = User.create(name: params[:name], password: params[:password])
       session[:user_id] = @user.id
@@ -36,8 +45,12 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect to "users/#{current_user.slug}"
-    else
+    elsif !user
+      session[:message] = 'That user doesn\'t exist. You can create it here!'
       redirect '/signup'
+    else
+      session[:message] = 'Wrong password. Try that again!'
+      redirect to '/login'
     end
   end
 

@@ -1,0 +1,13 @@
+<h1>Create a new party!<h1>
+
+<form action="/parties" method="post">
+  <h4><label>Party Name:</label>
+  <input type="text" name="Party Name"></h4>
+  <h4><label>First party member:</label>
+  <select>
+    <% @user.characters.each do |character| %>
+    <option value="text"real-text</option>
+    <% end %>
+  </select></h4>
+  <input type="submit" value="Create">
+</form>

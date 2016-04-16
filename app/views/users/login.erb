@@ -1,4 +1,9 @@
 <h1>Login!</h1>
+
+<% unless @message.nil? %>
+  <%= @message %>
+<% end %>
+
 <form method="post" action="/login">
   <p><input type="text" name="name" placeholder="username:"></p>
   <p><input type="text" name="password" placeholder="password:"></p>

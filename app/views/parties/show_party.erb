@@ -1,0 +1,5 @@
+<h1><%= @party.name %></h1>
+<h3>Members:</h3>
+<% @party.characters.each do |character| %>
+  <li><a href="/characters/<%= character.slug %>"><%= character.name %></a></li>
+<% end %>
