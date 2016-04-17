@@ -73,9 +73,9 @@
   <h5><label>Initiative: </label>
   <input type="number" name="initiative" min="1" max="15" value="<%= @character.initiative %>" required></h5>
   <h5><label>Speed: </label>
-  <input type="number" name="speed" min="1" max="50" value="<%= @character.speed %>" required></h5>
+  <input type="number" name="speed" min="0" max="50" value="<%= @character.speed %>" required></h5>
   <h5><label>Notes: </label><br>
-  <textarea name="notes" cols=50 rows=5><%= @character.notes %></textarea>
-  <h4><input type="submit" value="Update"></h4>
+  <textarea name="notes" cols=50 rows=5><%= @character.notes %></textarea><br>
+  <input class="btn btn-primary" type="submit" value="Update">
 </form>
-<h4><button onclick="location.href='/characters/<%= @character.id %>'">Cancel</button></h4>
+<a class="btn btn-primary" href="/characters/<%= @character.id %>">Cancel</a>

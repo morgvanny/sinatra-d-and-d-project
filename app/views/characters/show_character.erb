@@ -26,10 +26,10 @@
 <p>Notes: <%= @character.notes %></p>
 
 <% if current_user.id == @character.user_id %>
-  <button onclick="location.href='/characters/<%= @character.id %>/edit'">Edit Character</button><br><br>
+  <a class="btn btn-primary" href="/characters/<%= @character.id %>/edit">Edit Character</a><br><br>
 
   <form method="post" action="/characters/<%=@character.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Character">
+    <input class="btn btn-primary" type="submit" value="Delete Character">
   </form>
 <% end %>
