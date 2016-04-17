@@ -1,13 +1,13 @@
 <% if @parties.count > 0 %>
 
-  <h1> Here are all of the available parties! </h1>
+  <h2> Here are all of the available parties! </h2>
   <% @parties.each do |party| %>
     <li><a href="/parties/<%= party.slug %>"><%= party.name %></a></li>
   <% end %>
 
 <% else %>
 
-  <h1> There are no parties at this time. </h1>
+  <h2> There are no parties at this time. </h2>
   <h3><a href="/parties/new">Create one!</a></h3>
 
 <% end %>

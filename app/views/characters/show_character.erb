@@ -2,4 +2,34 @@
   <%= @message %>
 <% end %>
 
-hello <%= @character.name %>
+<h2> Character Profile </h2>
+
+<p>Name: <%= @character.name %></p>
+<% if @character.party %>
+  <p>Party: <a href="/parties/<%= @character.party.slug %>"><%= @character.party.name %></a></p>
+<% else %>
+  <p>Party: Not a member of a party yet!</p>
+<% end %>
+<p>Race: <%= @character.race %></p>
+<p>Class: <%= @character.character_class %></p>
+<p>Alignment: <%= @character.alignment %></p>
+<p>Strength: <%= @character.strength %></p>
+<p>Dexterity: <%= @character.dexterity %></p>
+<p>Constitution: <%= @character.constitution %></p>
+<p>Intelligence: <%= @character.intelligence %></p>
+<p>Wisdom: <%= @character.wisdom %></p>
+<p>Charisma: <%= @character.charisma %></p>
+<p>Hit Points: <%= @character.hp %></p>
+<p>Armor Class: <%= @character.ac %></p>
+<p>Initiative: <%= @character.initiative %></p>
+<p>Speed: <%= @character.speed %></p>
+<p>Notes: <%= @character.notes %></p>
+
+<% if current_user.id == @character.user_id %>
+  <button onclick="location.href='/characters/<%= @character.id %>/edit'">Edit Character</button><br><br>
+
+  <form method="post" action="/characters/<%=@character.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Character">
+  </form>
+<% end %>

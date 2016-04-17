@@ -6,12 +6,14 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/create_user'
     else
-      redirect to "users/#{current_user.slug}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
+    @message = session[:message]
+    session[:message] = nil
     if logged_in? && current_user.id == @user.id
       erb :'users/personal_profile'
     else
@@ -20,12 +22,12 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    @message = session[:message]
-    session[:message] = nil
     if !logged_in?
+      @message = session[:message]
+      session[:message] = nil
       erb :'users/login'
     else
-      redirect to "users/#{current_user.slug}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
@@ -36,7 +38,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(name: params[:name], password: params[:password])
       session[:user_id] = @user.id
-      redirect to "users/#{current_user.slug}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
     user = User.find_by(name: params[:name])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to "users/#{current_user.slug}"
+      redirect to "/users/#{current_user.slug}"
     elsif !user
       session[:message] = 'That user doesn\'t exist. You can create it here!'
       redirect '/signup'

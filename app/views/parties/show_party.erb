@@ -1,5 +1,12 @@
-<h1><%= @party.name %></h1>
-<h3>Members:</h3>
+<% unless @message.nil? %>
+  <%= @message %>
+<% end %>
+
+<h2><%= @party.name %></h2>
+<% if current_user.parties.find {|party| party != @party} %>
+  <p><a href="/parties/<%= @party.slug %>/join">Join this party!</a></p>
+<% end %>
+<h3>Characters in the party:</h3>
 <% @party.characters.each do |character| %>
-  <li><a href="/characters/<%= character.slug %>"><%= character.name %></a></li>
+  <li><a href="/characters/<%= character.id %>"><%= character.name %></a></li>
 <% end %>

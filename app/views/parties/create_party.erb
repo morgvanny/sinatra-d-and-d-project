@@ -1,12 +1,16 @@
-<h1>Create a new party!<h1>
+<% unless @message.nil? %>
+  <%= @message %>
+<% end %>
+
+<h2>Create a new party!<h2>
 
 <form action="/parties" method="post">
   <h4><label>Party Name:</label>
-  <input type="text" name="Party Name"></h4>
+  <input type="text" name="name" required></h4>
   <h4><label>First party member:</label>
-  <select>
+  <select name="character">
     <% @user.characters.each do |character| %>
-    <option value="text"real-text</option>
+      <option value="<%= character.id %>"><%= character.name %></option>
     <% end %>
   </select></h4>
   <input type="submit" value="Create">

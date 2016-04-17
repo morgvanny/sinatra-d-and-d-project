@@ -1,16 +1,16 @@
 <% if @user.characters.count >= 1 %>
-  <p> Here are <%= @user.name %>'s characters:
+  <h4> Here are <%= @user.name %>'s characters: </h4>
   <% @user.characters.each do |character| %>
-    <p>LINK</p>
+    <p><a href="/characters/<%= character.id %>"><%= character.name %></a></p>
   <% end %>
 <% else %>
   <p> <%= @user.name %> doesn't have any characters yet! </p>
 <% end %>
 
 <% if @user.parties.count >= 1 %>
-  <p> These are <%= @user.name %>'s parties: </p>
-  <% @user.parties.each do |party| %>
-    <p>LINK</p>
+  <h4> These are <%= @user.name %>'s parties: </h4>
+  <% @user.parties.uniq.each do |party| %>
+    <p><a href="/parties/<%= party.slug %>"><%= party.name %></p>
   <% end %>
 <% else %>
   <p> <%= @user.name %> isn't a member of any parties yet! </p>

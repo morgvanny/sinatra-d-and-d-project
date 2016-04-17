@@ -1,72 +1,81 @@
-<h1>Edit <%= @character.name %>!<h1>
+<h2>Edit <%= @character.name %>!<h2>
 
-<form action="/characters/<%= @character.slug %>" method="post">
+<form action="/characters/<%= @character.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <h5><label>Character Name:</label>
   <input type="text" name="name" value="<%= @character.name %>" required></h5>
   <h5><label>Select a party to join:</label>
   <select name="party">
-    <option value="<%= party.name %>"> <%= @character.party.name %></option>
-    <% Party.all.each do |party| %>
-      <% if party.name != @character.party.name %>
+    <% if @character.party %>
+      <option value="<%= @character.party.name %>"><%= @character.party.name %></option>
+      <% Party.all.each do |party| %>
+        <% if party.name != @character.party.name %>
+          <option value="<%= party.name %>"><%= party.name %></option>
+        <% end %>
+      <% end %>
+      <option value=""> <%= "Join one later" %></option>
+      <% else %>
+      <option value=""> <%= "Join one later" %></option>
+      <% Party.all.each do |party| %>
         <option value="<%= party.name %>"><%= party.name %></option>
       <% end %>
     <% end %>
   </select></h5>
   <h5><label>Race: </label>
-  <input type="radio" name="race" value="Dwarf" required>  Dwarf
-  <input type="radio" name="race" value="Elf">  Elf
-  <input type="radio" name="race" value="Halfling"> Halfling
-  <input type="radio" name="race" value="Human">  Human
-  <input type="radio" name="race" value="Dragonborn">  Dragonborn
-  <input type="radio" name="race" value="Gnome">  Gnome
-  <input type="radio" name="race" value="Half-Elf">  Half-Elf
-  <input type="radio" name="race" value="Half-Orc">  Half-Orc
-  <input type="radio" name="race" value="Tiefling">  Tiefling</h5>
+  <input type="radio" name="race" value="Dwarf" required <%= 'checked' if @character.race == "Dwarf"%>>  Dwarf
+  <input type="radio" name="race" value="Elf"<%= 'checked' if @character.race == "Elf"%>>  Elf
+  <input type="radio" name="race" value="Halfling"<%= 'checked' if @character.race == "Halfling"%>>  Halfling
+  <input type="radio" name="race" value="Human"<%= 'checked' if @character.race == "Human"%>>  Human
+  <input type="radio" name="race" value="Dragonborn"<%= 'checked' if @character.race == "Dragonborn"%>>  Dragonborn
+  <input type="radio" name="race" value="Gnome"<%= 'checked' if @character.race == "Gnome"%>>  Gnome
+  <input type="radio" name="race" value="Half-Elf"<%= 'checked' if @character.race == "Half-Elf"%>>  Half-Elf
+  <input type="radio" name="race" value="Half-Orc"<%= 'checked' if @character.race == "Half-Orc"%>>  Half-Orc
+  <input type="radio" name="race" value="Tiefling"<%= 'checked' if @character.race == "Tiefling"%>>  Tiefling</h5>
   <h5><label>Class: </label>
-  <input type="radio" name="character_class" value="Barbarian" required> Barbarian
-  <input type="radio" name="character_class" value="Bard">  Bard
-  <input type="radio" name="character_class" value="Cleric">  Cleric
-  <input type="radio" name="character_class" value="Druid"> Druid
-  <input type="radio" name="character_class" value="Fighter"> Fighter
-  <input type="radio" name="character_class" value="Monk">  Monk
-  <input type="radio" name="character_class" value="Paladin"> Paladin
-  <input type="radio" name="character_class" value="Ranger">  Ranger
-  <input type="radio" name="character_class" value="Rogue"> Rogue
-  <input type="radio" name="character_class" value="Sorcerer">  Sorcerer
-  <input type="radio" name="character_class" value="Warlock"> Warlock
-  <input type="radio" name="character_class" value="Wizard">  Wizard</h5>
+  <input type="radio" name="character_class" value="Barbarian" required<%= 'checked' if @character.character_class == "Barbarian"%>>  Barbarian
+  <input type="radio" name="character_class" value="Bard"<%= 'checked' if @character.character_class == "Bard"%>>  Bard
+  <input type="radio" name="character_class" value="Cleric"<%= 'checked' if @character.character_class == "Cleric"%>>  Cleric
+  <input type="radio" name="character_class" value="Druid"<%= 'checked' if @character.character_class == "Druid"%>>  Druid
+  <input type="radio" name="character_class" value="Fighter"<%= 'checked' if @character.character_class == "Fighter"%>>  Fighter
+  <input type="radio" name="character_class" value="Monk"<%= 'checked' if @character.character_class == "Monk"%>>  Monk
+  <input type="radio" name="character_class" value="Paladin"<%= 'checked' if @character.character_class == "Paladin"%>>  Paladin
+  <input type="radio" name="character_class" value="Ranger"<%= 'checked' if @character.character_class == "Ranger"%>>  Ranger
+  <input type="radio" name="character_class" value="Rogue"<%= 'checked' if @character.character_class == "Rogue"%>> Rogue
+  <input type="radio" name="character_class" value="Sorcerer"<%= 'checked' if @character.character_class == "Sorcerer"%>>  Sorcerer
+  <input type="radio" name="character_class" value="Warlock"<%= 'checked' if @character.character_class == "Warlock"%>> Warlock
+  <input type="radio" name="character_class" value="Wizard"<%= 'checked' if @character.character_class == "Wizard"%>>  Wizard</h5>
   <h5><label>Alignment: </label>
-  <input type="radio" name="alignment" value="Lawful Good" required>  Lawful Good
-  <input type="radio" name="alignment" value="Neutral Good">  Neutral Good
-  <input type="radio" name="alignment" value="Chaotic Good">  Chaotic Good
-  <input type="radio" name="alignment" value="Lawful Neutral">  Lawful Neutral
-  <input type="radio" name="alignment" value="True Neutral">  True Neutral
-  <input type="radio" name="alignment" value="Chaotic Neutral">  Chaotic Neutral
-  <input type="radio" name="alignment" value="Lawful Evil">  Lawful Evil
-  <input type="radio" name="alignment" value="Neutral Evil">  Neutral Evil
-  <input type="radio" name="alignment" value="Chaotic Evil">  Chaotic Evil</h5>
+  <input type="radio" name="alignment" value="Lawful Good" required <%= 'checked' if @character.alignment == "Lawful Good"%>>  Lawful Good
+  <input type="radio" name="alignment" value="Neutral Good"<%= 'checked' if @character.alignment == "Neutral Good"%>>  Neutral Good
+  <input type="radio" name="alignment" value="Chaotic Good"<%= 'checked' if @character.alignment == "Chaotic Good"%>>  Chaotic Good
+  <input type="radio" name="alignment" value="Lawful Neutral"<%= 'checked' if @character.alignment == "Lawful Neutral"%>>  Lawful Neutral
+  <input type="radio" name="alignment" value="True Neutral"<%= 'checked' if @character.alignment == "True Neutral"%>>  True Neutral
+  <input type="radio" name="alignment" value="Chaotic Neutral"<%= 'checked' if @character.alignment == "Chaotic Neutral"%>>  Chaotic Neutral
+  <input type="radio" name="alignment" value="Lawful Evil"<%= 'checked' if @character.alignment == "Lawful Evil"%>>  Lawful Evil
+  <input type="radio" name="alignment" value="Neutral Evil"<%= 'checked' if @character.alignment == "Neutral Evil"%>>  Neutral Evil
+  <input type="radio" name="alignment" value="Chaotic Evil"<%= 'checked' if @character.alignment == "Chaotic Evil"%>>  Chaotic Evil</h5>
   <h5><label>Strength: </label>
-  <input type="number" name="strength" min="1" max="20" required></h5>
+  <input type="number" name="strength" min="1" max="20" value="<%= @character.strength %>" required></h5>
   <h5><label>Dexterity: </label>
-  <input type="number" name="dexterity" min="1" max="20" required></h5>
+  <input type="number" name="dexterity" min="1" max="20" value="<%= @character.dexterity %>" required></h5>
   <h5><label>Constitution: </label>
-    <input type="number" name="constitution" min="1" max="20" required></h5>
+    <input type="number" name="constitution" min="1" max="20" value="<%= @character.constitution %>" required></h5>
   <h5><label>Intelligence: </label>
-  <input type="number" name="intelligence" min="1" max="20" required></h5>
+  <input type="number" name="intelligence" min="1" max="20" value="<%= @character.intelligence %>" required></h5>
   <h5><label>Wisdom: </label>
-  <input type="number" name="wisdom" min="1" max="20" required></h5>
+  <input type="number" name="wisdom" min="1" max="20" value="<%= @character.wisdom %>" required></h5>
   <h5><label>Charisma: </label>
-  <input type="number" name="charisma" min="1" max="20" required></h5>
+  <input type="number" name="charisma" min="1" max="20" value="<%= @character.charisma %>" required></h5>
   <h5><label>Hit Points: </label>
-  <input type="number" name="hit points" min="1" max="999" required></h5>
+  <input type="number" name="hit points" min="1" max="999" value="<%= @character.hp %>" required></h5>
   <h5><label>Armor Class: </label>
-  <input type="number" name="armor class" min="1" max="25" required></h5>
+  <input type="number" name="armor class" min="1" max="25" value="<%= @character.ac %>" required></h5>
   <h5><label>Initiative: </label>
-  <input type="number" name="initiative" min="1" max="15" required></h5>
+  <input type="number" name="initiative" min="1" max="15" value="<%= @character.initiative %>" required></h5>
   <h5><label>Speed: </label>
-  <input type="number" name="dexterity" min="5" max="50" required></h5>
+  <input type="number" name="speed" min="1" max="50" value="<%= @character.speed %>" required></h5>
   <h5><label>Notes: </label><br>
-  <textarea name="notes" cols=50 rows=5></textarea>
-  <h4><input type="submit" value="Create"></h4>
+  <textarea name="notes" cols=50 rows=5><%= @character.notes %></textarea>
+  <h4><input type="submit" value="Update"></h4>
 </form>
+<h4><button onclick="location.href='/characters/<%= @character.id %>'">Cancel</button></h4>

@@ -1,7 +1,11 @@
+<% unless @message.nil? %>
+  <%= @message %>
+<% end %>
+
 <% if @user.characters.count >= 1 %>
-  <p> Here are your characters, <%= @user.name %>
+  <h4> Here are your characters, <%= @user.name %></h4>
   <% @user.characters.each do |character| %>
-    <p>LINK</p>
+    <p><a href="/characters/<%= character.id %>"><%= character.name %></p>
   <% end %>
 <% else %>
   <p> You don't have any characters yet! </p>
@@ -9,11 +13,11 @@
 <p><a href="/characters/new"> Create a new character! </a><p>
 
 <% if @user.parties.count >= 1 %>
-  <p> These are your parties: </p>
-  <% @user.parties.each do |party| %>
-    <p>LINK</p>
+  <h4> These are your parties: </h4>
+  <% @user.parties.uniq.each do |party| %>
+    <p><a href="/parties/<%= party.slug %>"><%= party.name %></p>
   <% end %>
 <% else %>
   <p> You aren't a member of any parties yet! </p>
 <% end %>
-<p><a href="/parties/"> Join a party </a> or <a href="/parties/new"> create a new party! </a><p>
+<p><a href="/parties"> Join a party </a> or <a href="/parties/new"> create a new party! </a><p>

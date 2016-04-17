@@ -1,0 +1,14 @@
+<h2>Join <%= @party.name %></h2>
+<p>Select which character you'd like to join this party.</p>
+
+<form action="/parties/<%= @party.slug %>/join" method="post">
+  <h4><label>Select which character you'd like to join this party:</label>
+  <select name="character">
+    <% @user.characters.each do |character| %>
+      <% if character.party != @party %>
+        <option value="<%= character.id %>"><%= character.name %></option>
+      <% end %>
+    <% end %>
+  </select></h4>
+  <input type="submit" value="Join">
+</form>

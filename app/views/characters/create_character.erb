@@ -2,7 +2,7 @@
   <%= @message %>
 <% end %>
 
-<h1>Create a new character!<h1>
+<h2>Create a new character!<h2>
 
 <form action="/characters" method="post">
   <h5><label>Character Name:</label>
@@ -25,17 +25,17 @@
   <input type="radio" name="race" value="Half-Orc">  Half-Orc
   <input type="radio" name="race" value="Tiefling">  Tiefling</h5>
   <h5><label>Class: </label>
-  <input type="radio" name="character_class" value="Barbarian" required> Barbarian
+  <input type="radio" name="character_class" value="Barbarian" required>  Barbarian
   <input type="radio" name="character_class" value="Bard">  Bard
   <input type="radio" name="character_class" value="Cleric">  Cleric
-  <input type="radio" name="character_class" value="Druid"> Druid
-  <input type="radio" name="character_class" value="Fighter"> Fighter
+  <input type="radio" name="character_class" value="Druid">  Druid
+  <input type="radio" name="character_class" value="Fighter">  Fighter
   <input type="radio" name="character_class" value="Monk">  Monk
-  <input type="radio" name="character_class" value="Paladin"> Paladin
+  <input type="radio" name="character_class" value="Paladin">  Paladin
   <input type="radio" name="character_class" value="Ranger">  Ranger
-  <input type="radio" name="character_class" value="Rogue"> Rogue
+  <input type="radio" name="character_class" value="Rogue">  Rogue
   <input type="radio" name="character_class" value="Sorcerer">  Sorcerer
-  <input type="radio" name="character_class" value="Warlock"> Warlock
+  <input type="radio" name="character_class" value="Warlock">  Warlock
   <input type="radio" name="character_class" value="Wizard">  Wizard</h5>
   <h5><label>Alignment: </label>
   <input type="radio" name="alignment" value="Lawful Good" required>  Lawful Good
@@ -60,13 +60,13 @@
   <h5><label>Charisma: </label>
   <input type="number" name="charisma" min="1" max="20" required></h5>
   <h5><label>Hit Points: </label>
-  <input type="number" name="hit Points" min="1" max="999" required></h5>
+  <input type="number" name="hit points" min="1" max="999" required></h5>
   <h5><label>Armor Class: </label>
   <input type="number" name="armor class" min="1" max="25" required></h5>
   <h5><label>Initiative: </label>
   <input type="number" name="initiative" min="1" max="15" required></h5>
   <h5><label>Speed: </label>
-  <input type="number" name="dexterity" min="5" max="50" required></h5>
+  <input type="number" name="speed" min="0" max="50" required></h5>
   <h5><label>Notes: </label><br>
   <textarea name="notes" cols=50 rows=5></textarea>
   <h4><input type="submit" value="Create"></h4>
