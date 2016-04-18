@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   post '/signup' do
     if User.find_by(name: params[:name])
       session[:message] = 'That username is taken already. Sorry!'
-      redirect to '/users/signup'
+      redirect to '/signup'
     else
       @user = User.create(name: params[:name], password: params[:password])
       session[:user_id] = @user.id
