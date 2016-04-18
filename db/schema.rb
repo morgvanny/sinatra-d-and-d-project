@@ -11,35 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415031010) do
-
-  create_table "characters", force: :cascade do |t|
-    t.string  "name"
-    t.string  "race"
-    t.string  "character_class"
-    t.string  "alignment"
-    t.integer "strength"
-    t.integer "dexterity"
-    t.integer "constitution"
-    t.integer "intelligence"
-    t.integer "wisdom"
-    t.integer "charisma"
-    t.integer "hp"
-    t.integer "ac"
-    t.integer "initiative"
-    t.integer "speed"
-    t.string  "notes"
-    t.integer "user_id"
-    t.integer "party_id"
-  end
-
-  create_table "parties", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end

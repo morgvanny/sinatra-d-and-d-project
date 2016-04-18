@@ -81,7 +81,7 @@ class PartiesController < ApplicationController
       @old_party.delete
       @add_message = " Everyone left #{@old_party.name} (party) so it was deleted."
     end
-    session[:message] = 'You successfully joined the party!' + @add_message
+    session[:message] = "#{@character.name} successfully joined the party!" + @add_message
     redirect to "parties/#{@party.slug}"
   end
 

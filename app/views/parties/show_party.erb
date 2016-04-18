@@ -3,9 +3,11 @@
 <% end %>
 
 <h2><%= @party.name %></h2>
-<% current_user.characters.each do |character| %>
-  <% if character.party != @party %>
-    <% @switch = true %>
+<% if logged_in? %>
+  <% current_user.characters.each do |character| %>
+    <% if character.party != @party %>
+      <% @switch = true %>
+    <% end %>
   <% end %>
 <% end %>
 <% if @switch %>

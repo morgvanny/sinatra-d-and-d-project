@@ -1,5 +1,5 @@
 <% if @parties.count > 0 %>
-  <% if current_user.characters.empty? %>
+  <% if logged_in? && current_user.characters.empty? %>
     You have to create a character before you can join a party!
   <% end %>
 
