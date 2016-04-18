@@ -57,7 +57,7 @@ class PartiesController < ApplicationController
     else
       @party = Party.create(name: params["name"])
       @character = Character.find_by_id(params["character"])
-      @old_party = @character.party
+      @old_party = @character.party unless @character.party == nil
       @character.party = @party
       @character.save
       @add_message = ""
@@ -73,8 +73,7 @@ class PartiesController < ApplicationController
   post '/parties/:slug/join' do
     @party = Party.find_by_slug(params[:slug])
     @character = Character.find_by_id(params["character"])
-    @old_party = @character.party
-    old_party_name = @old_party.name
+    @old_party = @character.party unless @character.party == nil
     @character.party = @party
     @character.save
     @add_message = ""
