@@ -3,8 +3,10 @@
 <% end %>
 
 <h2><%= @party.name %></h2>
-<% if current_user.parties.find {|party| party != @party} %>
-  <p><a href="/parties/<%= @party.slug %>/join">Join this party!</a></p>
+<% current_user.characters.each do |character| %>
+  <% if character.party != @party %>
+    <p><a href="/parties/<%= @party.slug %>/join">Join this party!</a></p>
+  <% end %>
 <% end %>
 <h3>Characters in the party:</h3>
 <% @party.characters.each do |character| %>

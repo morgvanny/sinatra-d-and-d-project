@@ -33,12 +33,13 @@ class PartiesController < ApplicationController
     if logged_in?
       @user = current_user
       if @user.characters.count >= 1
-        if @user.parties.find {|party| party != @party}
-          erb :'/parties/join_party'
-        else
-          session[:message] = 'All of your characters are already in that party!'
-          redirect to '/login'
+        @user.characters.each do |character|
+          if character.party != @party
+            return erb :'/parties/join_party'
+          end
         end
+        session[:message] = 'All of your characters are already in that party!'
+        redirect to '/login'
       else
         session[:message] = 'You have to have a character to join a party!'
         redirect to '/characters/new'
