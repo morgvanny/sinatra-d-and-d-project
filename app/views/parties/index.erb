@@ -1,4 +1,7 @@
 <% if @parties.count > 0 %>
+  <% if current_user.characters.empty? %>
+    You have to create a character before you can join a party!
+  <% end %>
 
   <h2> Here are all of the available parties! </h2>
   <% @parties.each do |party| %>
