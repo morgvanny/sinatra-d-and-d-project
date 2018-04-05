@@ -24,7 +24,7 @@
 <p>Initiative: <%= @character.initiative %></p>
 <p>Speed: <%= @character.speed %></p>
 <p>Notes: <%= @character.notes %></p>
-
+<% binding.pry %>
 <% if logged_in? && current_user.id == @character.user_id %>
   <a class="btn btn-primary" href="/characters/<%= @character.id %>/edit">Edit Character</a><br><br>
 
